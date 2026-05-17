@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="AMINO RESTO BALI - Natural Luxury Dining, healthy and tasty food, online booking, menu, cart, and order tracking."
+    />
+    <meta name="theme-color" content="#0d7c73" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="AMINO" />
+    <meta
+      property="og:title"
+      content="AMINO RESTO BALI | Natural Luxury Dining"
+    />
+    <meta
+      property="og:description"
+      content="Healthy & tasty food, luxury-natural ambience, booking table, delivery, and WhatsApp orders in Bali."
+    />
+    <meta property="og:type" content="restaurant.restaurant" />
+    <title>AMINO RESTO BALI | Natural Luxury Dining</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "AMINO RESTO BALI",
+        "servesCuisine": ["Healthy", "Balinese", "Cafe", "International"],
+        "telephone": "+62 823-4188-5469",
+        "priceRange": "Rp 40.000 - Rp 180.000",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Jl. Pantai Berawa",
+          "addressLocality": "Canggu",
+          "addressRegion": "Bali",
+          "addressCountry": "ID"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "07:30",
+            "closes": "22:30"
+          }
+        ]
+      }
+    </script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="assets/restaurant-assets/icon.svg"
+      type="image/svg+xml"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <noscript>
+      <div class="page">
+        <div class="card notice">
+          AMINO RESTO BALI membutuhkan JavaScript aktif untuk menu, keranjang,
+          booking, login, dan panel admin. Silakan aktifkan JavaScript di
+          browser Anda.
+        </div>
+      </div>
+    </noscript>
+    <div id="toast" class="toast" aria-live="polite"></div>
+    <header class="topbar" id="topbar">
+      <a class="brand" href="#/home" aria-label="AMINO RESTO BALI home">
+        <span class="brand-mark">A</span>
+        <span><strong>AMINO</strong><small>Resto Bali</small></span>
+      </a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="#/home">Home</a>
+        <a href="#/menu">Menu</a>
+        <a href="#/gallery">Gallery</a>
+        <a href="#/reviews">Reviews</a>
+        <a href="#/experiences">Experiences</a>
+        <a href="#/booking">Booking</a>
+        <a href="#/contact">Contact</a>
+        <a href="#/launch-center">Launch</a>
+        <a href="#/admin">Admin</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="openCartBtn" aria-label="Open cart">
+          🛒<span id="cartBadge" class="badge-count">0</span>
+        </button>
+        <a class="avatar" href="#/profile" aria-label="Profile"
+          ><span id="avatarInitial">U</span></a
+        >
+        <button
+          class="icon-btn menu-toggle"
+          id="menuToggle"
+          aria-label="Toggle menu"
+        >
+          ☰
+        </button>
+      </div>
+    </header>
+
+    <aside id="mobileMenu" class="mobile-menu" aria-hidden="true">
+      <a href="#/home">Home</a><a href="#/menu">Menu</a
+      ><a href="#/gallery">Gallery</a><a href="#/reviews">Reviews</a
+      ><a href="#/experiences">Experiences</a><a href="#/booking">Booking</a><a href="#/contact">Contact</a><a href="#/launch-center">Launch</a><a href="#/admin">Admin</a>
+    </aside>
+
+    <main id="app" tabindex="-1"></main>
+
+    <aside id="cartDrawer" class="drawer" aria-hidden="true">
+      <div class="drawer-head">
+        <h2>Keranjang</h2>
+        <button class="icon-btn" id="closeCartBtn">✕</button>
+      </div>
+      <div id="drawerCartItems" class="cart-list"></div>
+      <div class="drawer-total" id="drawerTotals"></div>
+      <a class="btn primary full" href="#/cart" id="checkoutLink">Checkout</a>
+    </aside>
+    <div id="overlay" class="overlay"></div>
+
+    <div
+      id="modal"
+      class="modal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+    ></div>
+
+    <template id="template-empty-state">
+      <section class="empty-state card">
+        <div class="empty-icon" aria-hidden="true">🌿</div>
+        <h2>Data belum tersedia</h2>
+        <p class="muted">
+          Konten akan muncul setelah Supabase seed dijalankan atau admin
+          menambahkan data dari panel.
+        </p>
+      </section>
+    </template>
+
+    <template id="template-menu-card">
+      <article class="card menu-card-template">
+        <div class="food-img">
+          <span class="overlay-price">Rp 00.000</span>
+        </div>
+        <h3 data-slot="name">Nama menu</h3>
+        <p class="muted" data-slot="description">Deskripsi menu</p>
+        <div class="badges" data-slot="badges"></div>
+        <p class="rating" data-slot="rating">★ 4.8</p>
+        <div class="btn-row">
+          <button class="btn primary">Add to Cart</button>
+          <button class="btn ghost">Quick View</button>
+        </div>
+      </article>
+    </template>
+
+    <template id="template-cart-row">
+      <div class="cart-row">
+        <div class="thumb"></div>
+        <div>
+          <b data-slot="item-name">Menu item</b>
+          <p class="muted" data-slot="item-price">Rp 00.000</p>
+          <input data-slot="item-note" placeholder="Catatan item" />
+        </div>
+        <div class="qty">
+          <button aria-label="Kurangi jumlah">−</button>
+          <b data-slot="item-qty">1</b>
+          <button aria-label="Tambah jumlah">+</button>
+        </div>
+      </div>
+    </template>
+
+    <template id="template-admin-dashboard">
+      <section class="admin-dashboard-template">
+        <div class="stats">
+          <div class="stat"><b>Rp 0</b><span>Revenue today</span></div>
+          <div class="stat"><b>0</b><span>Total orders</span></div>
+          <div class="stat"><b>0</b><span>Pending bookings</span></div>
+          <div class="stat"><b>0.0</b><span>Average rating</span></div>
+          <div class="stat"><b>0</b><span>Customers</span></div>
+          <div class="stat"><b>●</b><span>Realtime indicator</span></div>
+        </div>
+      </section>
+    </template>
+
+    <template id="template-print-receipt">
+      <article class="receipt">
+        <h1>AMINO RESTO BALI</h1>
+        <p>Natural Luxury Dining</p>
+        <hr />
+        <div data-slot="receipt-items"></div>
+        <hr />
+        <p>PRICES ARE NOT FIXED</p>
+        <p>Tax 10% + Service 5% apply</p>
+      </article>
+    </template>
+
+    <template id="template-skeleton-grid">
+      <div class="grid cards" aria-hidden="true">
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+      </div>
+    </template>
+    <nav class="bottom-nav" aria-label="Mobile bottom navigation">
+      <a href="#/home">⌂<span>Home</span></a>
+      <a href="#/menu">🍽<span>Menu</span></a>
+      <a href="#/cart">🛒<span>Cart</span></a>
+      <a href="#/experiences">✨<span>Vibes</span></a>
+      <a href="#/orders">📦<span>Orders</span></a>
+      <a href="#/profile">👤<span>Profile</span></a>
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/app.js"></script>
+    <script src="js/enhancements.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/growth-suite.js"></script>
+    <script src="js/finance-suite.js"></script>
+    <script src="js/quality-suite.js"></script>
+    <script src="js/concierge-suite.js"></script>
+    <script src="js/delivery-suite.js"></script>
+    <script src="js/launch-suite.js"></script>
+    <script src="js/ux-designer.js"></script>
+    <script src="js/location-3d.js"></script>
+    <script src="js/portfolio-pages.js"></script>
+    <script src="js/pwa-offline.js"></script>
+    <script src="js/operations-pro.js"></script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+{
+  "name": "AMINO RESTO BALI",
+  "short_name": "AMINO",
+  "description": "Natural Luxury Dining, healthy and tasty food, booking, cart, delivery tracking, and admin dashboard.",
+  "start_url": "./index.html#/home",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0d7c73",
+  "background_color": "#fff8ea",
+  "categories": ["food", "restaurant", "shopping", "lifestyle"],
+  "lang": "id",
+  "dir": "ltr",
+  "shortcuts": [
+    {
+      "name": "Menu",
+      "short_name": "Menu",
+      "description": "Open AMINO menu",
+      "url": "./index.html#/menu"
+    },
+    {
+      "name": "Book Table",
+      "short_name": "Booking",
+      "description": "Book a table",
+      "url": "./index.html#/booking"
+    },
+    {
+      "name": "Cart",
+      "short_name": "Cart",
+      "description": "Open cart and checkout",
+      "url": "./index.html#/cart"
+    },
+    {
+      "name": "Live Location",
+      "short_name": "Location",
+      "description": "Open live location center",
+      "url": "./index.html#/live-location"
+    }
+  ],
+  "icons": [
+    {
+      "src": "assets/restaurant-assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
