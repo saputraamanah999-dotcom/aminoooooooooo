@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">AMINO RESTO BALI icon</title>
+  <desc id="desc">Cream, teal, and gold restaurant monogram placeholder.</desc>
+  <defs>
+    <radialGradient id="bg" cx="32%" cy="22%" r="82%">
+      <stop offset="0" stop-color="#c99b42"/>
+      <stop offset="0.45" stop-color="#0d7c73"/>
+      <stop offset="1" stop-color="#093b32"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="150" fill="#fff8ea" opacity="0.94"/>
+  <circle cx="256" cy="256" r="102" fill="none" stroke="#c99b42" stroke-width="22"/>
+  <text x="256" y="286" text-anchor="middle" font-size="112" font-family="Georgia, serif" font-weight="700" fill="#093b32">A</text>
+</svg>
